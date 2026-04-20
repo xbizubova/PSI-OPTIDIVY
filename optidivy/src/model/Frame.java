@@ -1,6 +1,6 @@
 package model;
 
-public class Frame {
+public class Frame implements Product {
     int id;
     String name;
     String color;
@@ -11,6 +11,10 @@ public class Frame {
         this.name = name;
         this.color = color;
         this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @Override

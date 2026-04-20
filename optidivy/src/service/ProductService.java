@@ -17,16 +17,16 @@ public class ProductService {
     private ContactLenseRepository contactLenseRepository = new ContactLenseRepository();
     private LenseRepository lenseRepository = new LenseRepository();
 
-    public List<Frame> getAllFrames() {
-        return frameRepository.findAll();
+    public List<Frame> getAllFrames(Filter filter) {
+        return frameRepository.getProducts(filter);
     }
 
     public List<WearPeriod> getAllWearPeriods() {
         return wearPeriodRepository.findAll();
     }
 
-    public List<ContactLense> getAllContactLenses() {
-        return contactLenseRepository.findAll();
+    public List<ContactLense> getAllContactLenses(Filter filter) {
+        return contactLenseRepository.getProducts(filter);
     }
 
     public List<Lense> getAllLenses() {

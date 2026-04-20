@@ -8,4 +8,8 @@ public class WearPeriod {
         this.id = id;
         this.name = name;
     }
+
+    public String getPeriod() {
+        return this.name;
+    }
 }

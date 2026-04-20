@@ -2,25 +2,29 @@ CREATE TABLE frames (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     color VARCHAR(100),
-    price DECIMAL
+    price DECIMAL,
+    CONSTRAINT unique_frames UNIQUE (name, color)
+);
+
+CREATE TABLE wear_period_options (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    CONSTRAINT unique_wear_period_options UNIQUE (name)
 );
 
 CREATE TABLE contact_lenses (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     wear_period INTEGER REFERENCES wear_period_options(id),
-    price DECIMAL
+    price DECIMAL,
+    CONSTRAINT unique_contact_lenses UNIQUE (name, wear_period)
 );
 
 CREATE TABLE lenses (
     id SERIAL PRIMARY KEY,
     type VARCHAR(100),
-    price DECIMAL
-);
-
-CREATE TABLE wear_period_options (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100)
+    price DECIMAL,
+    CONSTRAINT unique_lenses UNIQUE (type)
 );
 
 INSERT INTO frames (name, color, price) VALUES
@@ -31,7 +35,7 @@ INSERT INTO frames (name, color, price) VALUES
 INSERT INTO lenses (type, price) VALUES
 ('Obyčajné', 5.0),
 ('Slnečné', 10.0),
-('Modrý Filter', 15.0);
+('Modrý service.Filter', 15.0);
 
 INSERT INTO wear_period_options (name) VALUES
 ('Jednodenné'),

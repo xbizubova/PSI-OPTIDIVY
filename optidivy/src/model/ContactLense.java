@@ -1,20 +1,24 @@
 package model;
 
-public class ContactLense {
+public class ContactLense implements Product {
     int id;
     String name;
-    int wearPeriodId;
+    String wearPeriod;
     double price;
 
-    public ContactLense(int id, String name, int wearPeriodId, double price) {
+    public ContactLense(int id, String name, String wearPeriod, double price) {
         this.id = id;
         this.name = name;
-        this.wearPeriodId = wearPeriodId;
+        this.wearPeriod = wearPeriod;
         this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @Override
     public String toString() {
-        return name + " (" + wearPeriodId + ") :" + price ;
+        return name + " (" + wearPeriod + ") :" + price ;
     }
 }
