@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OPTIDIVY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header id="site-header">
+    <a href="#" class="logo">OPTIDIVY</a>
+    <div class="header-actions">
+      <a href="account.html">ACCOUNT</a>
+      <svg class="cart-icon" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ── SEARCH ── -->
+  <section class="search-section">
+    <div class="search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" placeholder="SEARCH"/>
+    </div>
+  </section>
+
+  <!-- ── MAIN ── -->
+  <main>
+
+    <!-- Sidebar -->
+    <aside>
+      <p class="menu-label">MENU</p>
+      <nav>
+        <ul>
+          <li><a href="shop">OKULIARE</a></li>
+          <li><a href="shop">KONTAKTNÉ ŠOŠOVKY</a></li>
+          <li><a href="#">REZERVÁCIA VYŠETRENIA</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Product grid -->
+    <div class="content">
+      <h2 class="section-title">NOVÝ TOVAR</h2>
+      <div class="product-grid">
+
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <!-- <img src="images/product1.jpg" alt="Okuliare 1"> -->
+          </div>
+          <p class="product-name">OKULIARE</p>
+          <p class="product-price">€ 129,00</p>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <!-- <img src="images/product2.jpg" alt="Okuliare 2"> -->
+          </div>
+          <p class="product-name">OKULIARE</p>
+          <p class="product-price">€ 149,00</p>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <!-- <img src="images/product3.jpg" alt="Okuliare 3"> -->
+          </div>
+          <p class="product-name">OKULIARE</p>
+          <p class="product-price">€ 119,00</p>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <!-- <img src="images/product4.jpg" alt="Okuliare 4"> -->
+          </div>
+          <p class="product-name">OKULIARE</p>
+          <p class="product-price">€ 159,00</p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-footer">OPTIDIVY</span>
+        <p>Not just selling glasses, we create a new world for you!</p>
+        <a href="#" class="insta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram
+        </a>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#">glasses</a></li>
+            <li><a href="#">Sale</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Other sortiment</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Learn more</h4>
+          <ul>
+            <li><a href="#">Delivery</a></li>
+            <li><a href="#">Payment</a></li>
+            <li><a href="#">Customer stories</a></li>
+            <li><a href="#">Best practices</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>OPTIDIVY</h4>
+          <ul>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Join us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 OPTIDIVY. Všetky práva vyhradené.</span>
+      <span>Trnava, Slovakia</span>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
+</body>
+</html>
