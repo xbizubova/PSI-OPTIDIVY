@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        if ($user->isOptometrista()) {
+        if ($user->isOptometrist()) {
             return redirect('/optometrista');
         }
 
