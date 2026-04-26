@@ -27,11 +27,16 @@ Laravel aplikácia sa nachádza v priečinku `app/optidivy`.
 	```bash
 	php artisan migrate --force
 	```
-8. Spustite frontend build server:
+
+8. Spustite seedery, ak chcete naplniť databázu testovacími dátami:
+    ```bash
+    php artisan db:seed --force
+    ```
+9. Spustite frontend build server:
 	```bash
 	npm run build
 	```
-9. Spustite Laravel server:
+10. Spustite Laravel server:
 	```bash
 	php artisan serve
 	```
