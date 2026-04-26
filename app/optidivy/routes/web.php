@@ -20,15 +20,12 @@ Route::post('/rezervacia', [RezervaciaController::class, 'store'])
     ->middleware('auth')->name('rezervacia.store');
 
 // ── Klient ────────────────────────────────────────────
-Route::middleware('klient')->group(function () {
-    Route::get('/ucet', fn() => view('ucet'))->name('ucet');
-});
-Route::middleware('klient')->group(function () {
+Route::middleware(['auth', 'klient'])->group(function () {
     Route::get('/ucet',  [UcetController::class, 'index'])->name('ucet');
     Route::patch('/ucet', [UcetController::class, 'update'])->name('ucet.update');
 });
 // ── Optometrista ──────────────────────────────────────
-Route::middleware('optometrista')->group(function () {
+Route::middleware(['auth', 'optometrista'])->group(function () {
     Route::get('/optometrista', [OptometristaController::class, 'index'])
         ->name('optometrista');
     Route::post('/optometrista/predpis', [OptometristaController::class, 'storePrescription'])

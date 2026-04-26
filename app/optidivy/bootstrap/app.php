@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'klient'       => \App\Http\Middleware\EnsureKlient::class,
+            'optometrista' => \App\Http\Middleware\EnsureOptometrista::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
