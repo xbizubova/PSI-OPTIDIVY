@@ -1,7 +1,46 @@
-V pgAdmin si treba vytvoriť databázu. V do optidivy projektového suboru treba prisať file s názvom db.properties, ktorého obsah bude vyzerať nasledovne:
+# OPTIDIVY
 
-url=jdbc:postgresql://localhost:5432/{{názov databázy}}
-user={{váš user name na pgAdmine, pravdepodobne postgres}}
-password={{vaše heslo do pgAdminu, alternatívne môžete nechať prázdne ak si viete nastaviť prístup bez hesla v pgAdmine}}
+Laravel aplikácia sa nachádza v priečinku `app/optidivy`.
 
-Odporúčam si aj pridať databázu ako data source (v IntelliJ na pravej lište, tak isto ako phpStorm), možno to pôjde aj bez toho ale pri upravovaní databázy to bude náročnejšie.
+## Požiadavky
+- PHP 8.3 alebo novšie
+- Composer
+- Node.js LTS
+
+## Lokálne spustenie
+1. Otvorte priečinok `app/optidivy`.
+2. V termináli nainštalujte PHP balíky:
+	```bash
+	composer install
+	```
+3. Nainštalujte frontend balíky:
+	```bash
+	npm install
+	```
+4. Ak súbor `.env` neexistuje, skopírujte ho z `.env.example`.
+5. Vygenerujte APP key:
+	```bash
+	php artisan key:generate
+	```
+6. SQLite databáza sa používa predvolene. Ak súbor `database/database.sqlite` neexistuje, vytvorte prázdny súbor s týmto názvom.
+7. Spustite migrácie:
+	```bash
+	php artisan migrate --force
+	```
+8. Spustite frontend build server:
+	```bash
+	npm run build
+	```
+9. Spustite Laravel server:
+	```bash
+	php artisan serve
+	```
+
+Potom otvorte adresu, ktorú Artisan vypíše, zvyčajne `http://127.0.0.1:8000`.
+
+## Čo sa nemá commitovať
+- `vendor/`
+- `node_modules/`
+- `public/build/`
+- `bootstrap/cache/*` okrem `.gitignore`
+- `.env`
