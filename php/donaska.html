@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OPTIDIVY – Donáška</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header id="site-header">
+  <a href="index.html" class="logo">OPTIDIVY</a>
+  <div class="header-actions">
+    <a href="login.html">LOG IN</a>
+    <svg class="cart-icon" viewBox="0 0 24 24" stroke-width="1.5">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 01-8 0"/>
+    </svg>
+  </div>
+</header>
+
+<div class="checkout-layout">
+
+  <!-- Left: delivery options -->
+  <div>
+    <h1 class="checkout-title">Donáška</h1>
+
+    <div class="radio-options">
+      <label class="radio-option selected" id="opt-predajna">
+        <input type="radio" name="donaska" value="predajna" checked/>
+        <div class="radio-dot"></div>
+        <span class="radio-option-label">Na predajňu</span>
+        <span class="radio-option-price">0.00€</span>
+      </label>
+
+      <label class="radio-option" id="opt-adresa">
+        <input type="radio" name="donaska" value="adresa"/>
+        <div class="radio-dot"></div>
+        <span class="radio-option-label">Na adresu</span>
+        <span class="radio-option-price">2.99€</span>
+      </label>
+    </div>
+
+    <!-- Address fields – shown only when "Na adresu" is selected -->
+    <div class="checkout-form" id="address-fields" style="display:none; margin-top:24px;">
+      <div class="form-row">
+        <input class="checkout-input" type="text" placeholder="Adresa"/>
+        <input class="checkout-input" type="text" placeholder="Mesto"/>
+      </div>
+      <div class="form-row">
+        <input class="checkout-input" type="text" placeholder="PSČ"/>
+        <input class="checkout-input" type="text" placeholder="Krajina"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: order summary -->
+  <div class="order-summary">
+    <p class="order-summary-title">OBSAH OBJEDNÁVKY</p>
+
+    <div class="order-item">
+      <div class="order-item-name">OKULIARE <span>Sklá: obyčajné</span></div>
+      <span class="order-item-price">130.05€</span>
+    </div>
+    <div class="order-item">
+      <div class="order-item-name">OKULIARE 2x <span>Sklá: modré</span></div>
+      <span class="order-item-price">230.05€</span>
+    </div>
+
+    <hr class="order-divider"/>
+
+    <div class="order-total">
+      <span class="order-total-label">Súčet</span>
+      <span class="order-total-price">335.10€</span>
+    </div>
+
+    <div class="order-actions">
+      <a href="kontakt.html" class="btn-order">Späť</a>
+      <a href="platba.html" class="btn-order">Ďalej</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo-footer">OPTIDIVY</span>
+      <p>Not just selling glasses, we create a new world for you!</p>
+      <a href="#" class="insta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Categories</h4><ul><li><a href="#">glasses</a></li><li><a href="#">Sale</a></li><li><a href="#">News</a></li><li><a href="#">Other sortiment</a></li></ul></div>
+      <div class="footer-col"><h4>Learn more</h4><ul><li><a href="#">Delivery</a></li><li><a href="#">Payment</a></li><li><a href="#">Customer stories</a></li><li><a href="#">Best practices</a></li></ul></div>
+      <div class="footer-col"><h4>OPTIDIVY</h4><ul><li><a href="#">Contact</a></li><li><a href="#">Support</a></li><li><a href="#">Join us</a></li></ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 OPTIDIVY. Všetky práva vyhradené.</span>
+    <span>Trnava, Slovakia</span>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  document.querySelectorAll('.radio-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      opt.querySelector('input').checked = true;
+      const isAdresa = opt.querySelector('input').value === 'adresa';
+      document.getElementById('address-fields').style.display = isAdresa ? 'flex' : 'none';
+    });
+  });
+</script>
+</body>
+</html>

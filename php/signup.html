@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>OPTIDIVY – Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="auth-page">
+
+<header class="auth-header">
+    <a href="index.html" class="logo">OPTIDIVY</a>
+    <a href="login.html" class="header-link">LOG IN</a>
+</header>
+
+<main class="auth-layout">
+    <div class="auth-card">
+        <h1 class="auth-title">SIGN UP</h1>
+
+        <div class="field">
+            <label for="email">Email</label>
+            <div class="input-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                </svg>
+                <input type="email" id="email" autocomplete="email"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="firstname">First name</label>
+            <div class="input-wrap">
+                <input type="text" id="firstname" autocomplete="given-name"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="surname">Surname</label>
+            <div class="input-wrap">
+                <input type="text" id="surname" autocomplete="family-name"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="password">Create a password</label>
+            <div class="input-wrap">
+                <input type="password" id="password" autocomplete="new-password"/>
+                <button type="button" class="toggle-pw" onclick="togglePw('password', this)" aria-label="Zobraziť heslo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <ellipse cx="12" cy="12" rx="10" ry="6"/>
+                        <circle cx="12" cy="12" r="2.5"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="password2">Repeat password</label>
+            <div class="input-wrap">
+                <input type="password" id="password2" autocomplete="new-password"/>
+                <button type="button" class="toggle-pw" onclick="togglePw('password2', this)" aria-label="Zobraziť heslo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <ellipse cx="12" cy="12" rx="10" ry="6"/>
+                        <circle cx="12" cy="12" r="2.5"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <button class="btn-primary">REGISTER ME!</button>
+
+        <p class="switch-text">Už máš účet? <a href="login.html">Prihlás sa</a></p>
+    </div>
+</main>
+
+<script src="auth.js"></script>
+</body>
+</html>

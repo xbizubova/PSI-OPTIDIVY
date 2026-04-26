@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>OPTIDIVY – Log In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="auth-page">
+
+<header class="auth-header">
+    <a href="index.html" class="logo">OPTIDIVY</a>
+    <a href="signup.html" class="header-link">CREATE AN ACCOUNT</a>
+</header>
+
+<main class="auth-layout">
+    <div class="auth-card">
+        <h1 class="auth-title">LOG IN</h1>
+
+        <div class="field">
+            <label for="email">email</label>
+            <div class="input-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                </svg>
+                <input type="email" id="email" autocomplete="email"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="password">password</label>
+            <div class="input-wrap">
+                <input type="password" id="password" autocomplete="current-password"/>
+                <button type="button" class="toggle-pw" onclick="togglePw('password', this)" aria-label="Zobraziť heslo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <ellipse cx="12" cy="12" rx="10" ry="6"/>
+                        <circle cx="12" cy="12" r="2.5"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <a href="#" class="forgot">Forgot password?</a>
+
+        <button class="btn-primary">LOG IN</button>
+
+        <p class="switch-text">Nemáš účet? <a href="signup.html">Zaregistruj sa</a></p>
+    </div>
+</main>
+
+<script src="auth.js"></script>
+</body>
+</html>

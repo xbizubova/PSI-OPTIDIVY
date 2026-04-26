@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OPTIDIVY – Optometrista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header id="site-header">
+  <a href="index.html" class="logo">OPTIDIVY</a>
+  <div class="header-actions">
+    <a href="login.html">LOG OUT</a>
+  </div>
+</header>
+
+<div class="optom-layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="patient-sidebar">
+    <p class="sidebar-title">DNEŠNÉ REZERVÁCIE</p>
+    <ul class="patient-list" id="patient-list">
+
+      <li class="patient-item" data-index="0">
+        <div class="patient-info">
+          <span class="patient-name">Jozef Mrkvička</span>
+          <span class="patient-time">9:00</span>
+        </div>
+        <div class="patient-radio"></div>
+      </li>
+
+      <li class="patient-item" data-index="1">
+        <div class="patient-info">
+          <span class="patient-name">Sára Chudá</span>
+          <span class="patient-time">11:00</span>
+        </div>
+        <div class="patient-radio"></div>
+      </li>
+
+      <li class="patient-item" data-index="2">
+        <div class="patient-info">
+          <span class="patient-name">Miroslav Hollý</span>
+          <span class="patient-time">16:00</span>
+        </div>
+        <div class="patient-radio"></div>
+      </li>
+
+    </ul>
+  </aside>
+
+  <!-- ── Exam panel ── -->
+  <main class="exam-panel">
+
+    <div class="exam-header">
+      <h1 class="exam-patient-name" id="exam-name">Miroslav Hollý</h1>
+      <span class="exam-time" id="exam-time">16:00</span>
+    </div>
+
+    <div class="eye-grid">
+
+      <!-- OD – pravé oko -->
+      <div class="eye-card">
+        <span class="eye-label">OD</span>
+
+        <div class="eye-field">
+          <label>Zraková Ostrosť</label>
+          <input type="text" id="od-ostrost" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>SPH</label>
+          <input type="text" id="od-sph" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>CYL</label>
+          <input type="text" id="od-cyl" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>AX</label>
+          <input type="text" id="od-ax" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>Pupilárna Vzdialenosť</label>
+          <input type="text" id="od-pv" placeholder=""/>
+        </div>
+      </div>
+
+      <!-- OS – ľavé oko -->
+      <div class="eye-card">
+        <span class="eye-label">OS</span>
+
+        <div class="eye-field">
+          <label>Zraková Ostrosť</label>
+          <input type="text" id="os-ostrost" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>SPH</label>
+          <input type="text" id="os-sph" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>CYL</label>
+          <input type="text" id="os-cyl" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>AX</label>
+          <input type="text" id="os-ax" placeholder=""/>
+        </div>
+        <div class="eye-field">
+          <label>Pupilárna Vzdialenosť</label>
+          <input type="text" id="os-pv" placeholder=""/>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="exam-actions">
+      <button class="btn-sklá">
+        Odporúčané sklá
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <button class="btn-potvrdit">Potvrdiť</button>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo-footer">OPTIDIVY</span>
+      <p>Not just selling glasses, we create a new world for you!</p>
+      <a href="#" class="insta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#">glasses</a></li>
+          <li><a href="#">Sale</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Other sortiment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Learn more</h4>
+        <ul>
+          <li><a href="#">Delivery</a></li>
+          <li><a href="#">Payment</a></li>
+          <li><a href="#">Customer stories</a></li>
+          <li><a href="#">Best practices</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>OPTIDIVY</h4>
+        <ul>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Join us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 OPTIDIVY. Všetky práva vyhradené.</span>
+    <span>Trnava, Slovakia</span>
+  </div>
+</footer>
+
+<script>
+  const patients = [
+    { name: 'Jozef Mrkvička', time: '9:00' },
+    { name: 'Sára Chudá',     time: '11:00' },
+    { name: 'Miroslav Hollý', time: '16:00' },
+  ];
+
+  // Activate last patient by default
+  let activeIndex = 2;
+
+  function setActive(index) {
+    activeIndex = index;
+    document.querySelectorAll('.patient-item').forEach((el, i) => {
+      el.classList.toggle('active', i === index);
+    });
+    document.getElementById('exam-name').textContent = patients[index].name;
+    document.getElementById('exam-time').textContent = patients[index].time;
+    // Clear fields when switching patients
+    document.querySelectorAll('.eye-field input').forEach(inp => inp.value = '');
+  }
+
+  document.querySelectorAll('.patient-item').forEach((el, i) => {
+    el.addEventListener('click', () => setActive(i));
+  });
+
+  // Init
+  setActive(activeIndex);
+
+  // Sticky header
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Confirm button
+  document.querySelector('.btn-potvrdit').addEventListener('click', () => {
+    alert(`✓ Záznam pre ${patients[activeIndex].name} bol uložený.`);
+  });
+</script>
+
+</body>
+</html>
