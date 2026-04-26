@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $user = Auth::user();
+        Auth::login($user);
 
         if ($user->isOptometrist()) {
             return redirect()->route('optometrista');
