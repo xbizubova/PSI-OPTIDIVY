@@ -32,9 +32,7 @@
     </div>
 </header>
 
-<main>
-    @yield('content')
-</main>
+@yield('content')
 
 <footer>
     <div class="footer-top">

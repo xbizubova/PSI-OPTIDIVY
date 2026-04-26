@@ -11,7 +11,7 @@
         </div>
     </section>
 
-    <div class="shop-layout">
+    <main class="shop-layout">
         <aside>
             <p class="menu-label">MENU</p>
             <nav>
@@ -37,5 +37,5 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    </main>
 @endsection
