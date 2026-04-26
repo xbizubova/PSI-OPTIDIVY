@@ -525,6 +525,12 @@ footer {
     margin-bottom: 8px;
 }
 
+.day-date {
+    font-size: 12px;
+    color: var(--black);
+    margin-bottom: 6px;
+}
+
 .slot {
     background: var(--grey-light);
     border: 1.5px solid transparent;
@@ -538,7 +544,9 @@ footer {
     cursor: pointer;
     transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
     user-select: none;
+    font-family: inherit;
 }
+button.slot { border: 1.5px solid transparent; }
 .slot:hover {
     border-color: var(--black);
     background: var(--white);
