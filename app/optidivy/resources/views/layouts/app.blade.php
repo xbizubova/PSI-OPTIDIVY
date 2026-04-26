@@ -22,15 +22,25 @@
             <a href="{{ route('login') }}">LOG IN</a>
         @endauth
 
-        <a href="{{ route('kosik') }}">
+        <a href="{{ route('kosik') }}" class="cart-link">
             <svg class="cart-icon" viewBox="0 0 24 24" stroke-width="1.5">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 01-8 0"/>
             </svg>
+            @auth
+                @php($cartCount = Auth::user()->cart?->items()->sum('quantity') ?? 0)
+                @if($cartCount > 0)
+                    <span class="cart-badge">{{ $cartCount }}</span>
+                @endif
+            @endauth
         </a>
     </div>
 </header>
+
+@if(session('error'))
+    <div class="flash flash-error">{{ session('error') }}</div>
+@endif
 
 @yield('content')
 

@@ -182,7 +182,52 @@ nav ul li a:hover { color: var(--accent); letter-spacing: 0.25em; }
     gap: 40px 32px;
 }
 
-.product-card { cursor: pointer; }
+.product-card { cursor: pointer; background: none; border: none; padding: 0; text-align: left; font: inherit; color: inherit; display: block; width: 100%; }
+
+.btn-add-cart {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: 1.5px solid var(--black);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-add-cart:hover { background: var(--black); color: var(--white); }
+
+.cart-link { position: relative; display: inline-flex; }
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flash {
+    max-width: 1100px;
+    margin: 16px auto 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+.flash-error { background: #fde2e2; color: #8a1f1f; border: 1px solid #f5b5b5; }
 .product-card:hover .product-img-wrap img { transform: scale(1.04); }
 .product-card:hover .product-name { color: var(--accent); }
 

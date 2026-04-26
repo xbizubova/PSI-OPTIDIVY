@@ -4,13 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RezervaciaController;
 use App\Http\Controllers\OptometristaController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UcetController;
 
 // ── Verejné ──────────────────────────────────────────
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/produkty/{kategoria}', [ProductController::class, 'kategoria'])->name('produkty');
 Route::get('/rezervacia', [RezervaciaController::class, 'index'])->name('rezervacia');
-Route::get('/kosik', fn() => view('kosik', ['cartItems' => [], 'total' => 0]))->name('kosik');
+Route::middleware('auth')->group(function () {
+    Route::get('/kosik',                [CartController::class, 'index'])->name('kosik');
+    Route::post('/kosik/{stock}',       [CartController::class, 'add'])->name('kosik.add');
+    Route::patch('/kosik/{item}',       [CartController::class, 'update'])->name('kosik.update');
+    Route::delete('/kosik/{item}',      [CartController::class, 'destroy'])->name('kosik.destroy');
+});
 Route::get('/kontakt', fn() => view('kontakt'))->name('kontakt');
 Route::get('/donaska', fn() => view('donaska'))->name('donaska');
 Route::get('/platba',  fn() => view('platba'))->name('platba');

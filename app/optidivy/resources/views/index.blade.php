@@ -27,13 +27,15 @@
             <h2 class="section-title">NOVÝ TOVAR</h2>
             <div class="product-grid">
                 @foreach($products as $product)
-                    <div class="product-card">
+                    <form method="POST" action="{{ route('kosik.add', $product->id) }}" class="product-card">
+                        @csrf
                         <div class="product-img-wrap">
                             {{-- <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}"> --}}
                         </div>
                         <p class="product-name">{{ strtoupper($product->name) }}</p>
                         <p class="product-price">€ {{ number_format($product->getPrice(), 2) }}</p>
-                    </div>
+                        <button type="submit" class="btn-add-cart">Pridať do košíka</button>
+                    </form>
                 @endforeach
             </div>
         </div>
