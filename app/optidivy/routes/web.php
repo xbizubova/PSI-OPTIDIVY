@@ -10,7 +10,7 @@ use App\Http\Controllers\UcetController;
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/produkty/{kategoria}', [ProductController::class, 'kategoria'])->name('produkty');
 Route::get('/rezervacia', [RezervaciaController::class, 'index'])->name('rezervacia');
-Route::get('/kosik',   fn() => view('kosik'))->name('kosik');
+Route::get('/kosik', fn() => view('kosik', ['cartItems' => [], 'total' => 0]))->name('kosik');
 Route::get('/kontakt', fn() => view('kontakt'))->name('kontakt');
 Route::get('/donaska', fn() => view('donaska'))->name('donaska');
 Route::get('/platba',  fn() => view('platba'))->name('platba');
