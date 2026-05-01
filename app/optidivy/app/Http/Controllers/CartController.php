@@ -22,21 +22,22 @@ class CartController extends Controller
     {
         $cart = $this->currentCart();
 
-        $item = $cart->items()->where('product_id', $stock->id)->first();
+        $product = $stock->contactLense ?? $stock->lense ?? $stock->frame;
+
+        abort_unless($product instanceof \App\Models\Product, 404);
+
+        $item = $cart->items()
+            ->where('product_id', $product->id)
+            ->where('product_type', get_class($product))
+            ->first();
+
         $current = $item?->quantity ?? 0;
 
         if ($current + 1 > $stock->quantity) {
-            return back()->with('error', 'Na sklade je už len ' . $stock->quantity . ' ks tohto produktu.');
+            return back()->with('error', 'Na sklade je už len ' . $stock->quantity . ' ks.');
         }
 
-        if ($item) {
-            $item->increment('quantity');
-        } else {
-            $cart->items()->create([
-                'product_id' => $stock->id,
-                'quantity'   => 1,
-            ]);
-        }
+        $product->addToCart($cart);
 
         return redirect()->route('kosik');
     }
@@ -48,17 +49,15 @@ class CartController extends Controller
         $request->validate(['action' => ['required', 'in:inc,dec']]);
 
         if ($request->action === 'inc') {
-            if ($item->quantity + 1 > $item->product->quantity) {
-                return back()->with('error', 'Na sklade je už len ' . $item->product->quantity . ' ks tohto produktu.');
+            $stock = $item->product->getStock();
+
+            if ($stock !== null && $item->quantity + 1 > $stock->quantity) {
+                return back()->with('error', 'Na sklade je už len ' . $stock->quantity . ' ks.');
             }
+
             $item->increment('quantity');
-        } else {
-            if ($item->quantity <= 1) {
-                $item->delete();
-            } else {
-                $item->decrement('quantity');
-            }
         }
+
 
         return redirect()->route('kosik');
     }

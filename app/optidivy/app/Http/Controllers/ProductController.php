@@ -15,8 +15,8 @@ class ProductController extends Controller
     public function kategoria(string $kategoria)
     {
         $map = [
-            'okuliare' => 'glasses',
-            'sosovky'  => 'contact_lenses',
+            'okuliare' => 'frame',
+            'sosovky'  => 'contact_lense',
         ];
 
         abort_unless(isset($map[$kategoria]), 404);

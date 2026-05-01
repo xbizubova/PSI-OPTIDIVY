@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('glasses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('frame_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('lense_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('frame_id')->constrained()->restrictOnDelete();
+            $table->foreignId('lense_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }

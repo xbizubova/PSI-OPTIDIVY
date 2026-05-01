@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
+            $table->boolean('discontinued')->default(false);
             $table->string('name');
             $table->text('description')->nullable();
             $table->float('price');
             $table->float('discount')->default(0);
             $table->integer('quantity');
             $table->integer('min_quantity')->default(1);
-            $table->enum('product_type', ['glasses', 'contact_lenses']);
-            $table->foreignId('product_id');       // polymorfný – ID glasses alebo contact_lenses
-            $table->string('product_type_model');  // 'App\Models\Glasses' alebo 'App\Models\ContactLenses'
+            $table->enum('product_type', ['frame', 'lense', 'contact_lense']);
             $table->timestamps();
         });
     }

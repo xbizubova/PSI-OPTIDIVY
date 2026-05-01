@@ -3,12 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Stock extends Model
 {
     protected $fillable = [
-        'name', 'description', 'price', 'discount',
-        'quantity', 'min_quantity', 'product_type', 'product_id', 'product_type_model'
+        'name', 'discontinued', 'description', 'price', 'discount',
+        'quantity', 'min_quantity', 'product_type'
     ];
 
     public function getPrice(): float
@@ -18,12 +23,21 @@ class Stock extends Model
 
     public function getLowStock(): array
     {
-        return Stock::where('quantity', '<=', DB::raw('min_quantity'))->get()->toArray();
+        return Stock::whereColumn('quantity', '<=', 'min_quantity')->get()->toArray();
     }
 
-// Polymorfný vzťah – buď Glasses alebo ContactLenses
-    public function product(): MorphTo
+    public function lense(): HasOne
     {
-        return $this->morphTo(__FUNCTION__, 'product_type_model', 'product_id');
+        return $this->hasOne(Lense::class);
+    }
+
+    public function frame(): HasOne
+    {
+        return $this->hasOne(Frame::class);
+    }
+
+    public function contactLense(): HasOne
+    {
+        return $this->hasOne(ContactLenses::class);
     }
 }

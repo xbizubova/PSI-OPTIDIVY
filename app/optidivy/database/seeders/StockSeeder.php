@@ -4,98 +4,81 @@ namespace Database\Seeders;
 
 use App\Models\Stock;
 use Illuminate\Database\Seeder;
+use App\Models\Frame;
+use App\Models\Lense;
+use App\Models\ContactLenses;
 
 class StockSeeder extends Seeder
 {
     public function run(): void
     {
-        // Okuliare (glasses)
-        $glasses = [
-            [
-                'name'              => 'Klasik Čierne',
-                'description'       => 'obyčajné',
-                'price'             => 89.99,
-                'discount'          => 0,
-                'quantity'          => 15,
-                'min_quantity'      => 3,
-                'product_type'      => 'glasses',
-                'product_id'        => 1,
-                'product_type_model'=> 'App\Models\Glasses',
-            ],
-            [
-                'name'              => 'Blue Light Shield',
-                'description'       => 'modré svetlo',
-                'price'             => 119.99,
-                'discount'          => 10,
-                'quantity'          => 8,
-                'min_quantity'      => 2,
-                'product_type'      => 'glasses',
-                'product_id'        => 2,
-                'product_type_model'=> 'App\Models\Glasses',
-            ],
-            [
-                'name'              => 'Hnedý Elegán',
-                'description'       => 'fotochromatické',
-                'price'             => 149.99,
-                'discount'          => 0,
-                'quantity'          => 5,
-                'min_quantity'      => 2,
-                'product_type'      => 'glasses',
-                'product_id'        => 3,
-                'product_type_model'=> 'App\Models\Glasses',
-            ],
-            [
-                'name'              => 'Zlatý Rám',
-                'description'       => 'obyčajné',
-                'price'             => 199.99,
-                'discount'          => 15,
-                'quantity'          => 4,
-                'min_quantity'      => 1,
-                'product_type'      => 'glasses',
-                'product_id'        => 4,
-                'product_type_model'=> 'App\Models\Glasses',
-            ],
+        $frames = [
+            ['name' => 'Klasik Čierne', 'description' => 'Klasický čierny rám', 'price' => 29.99, 'discount' => 0,  'quantity' => 15, 'min_quantity' => 3, 'color' => 'black',  'material' => 'acetate'],
+            ['name' => 'Zlatý Elegán',  'description' => 'Elegantný zlatý rám',  'price' => 49.99, 'discount' => 15, 'quantity' => 4,  'min_quantity' => 1, 'color' => 'gold',   'material' => 'metal'],
+            ['name' => 'Hnedý Klasik',  'description' => 'Hnedý acetátový rám',  'price' => 34.99, 'discount' => 0,  'quantity' => 8,  'min_quantity' => 2, 'color' => 'brown',  'material' => 'acetate'],
         ];
 
-        // Kontaktné šošovky (contact_lenses)
+        foreach ($frames as $data) {
+            $stock = Stock::create([
+                'name'         => $data['name'],
+                'description'  => $data['description'],
+                'price'        => $data['price'],
+                'discount'     => $data['discount'],
+                'quantity'     => $data['quantity'],
+                'min_quantity' => $data['min_quantity'],
+                'product_type' => 'frame',
+            ]);
+            Frame::create([
+                'stock_id' => $stock->id,
+                'color'    => $data['color'],
+                'material' => $data['material'],
+            ]);
+        }
+
+        $lenses = [
+            ['name' => 'Štandardné šošovky',     'description' => 'Bez filtra',           'price' => 19.99, 'discount' => 0,  'quantity' => 30, 'min_quantity' => 5, 'filter' => 'none'],
+            ['name' => 'Blue Light šošovky',      'description' => 'Filter modrého svetla', 'price' => 34.99, 'discount' => 10, 'quantity' => 20, 'min_quantity' => 4, 'filter' => 'blue_light'],
+            ['name' => 'Fotochromatické šošovky', 'description' => 'Fotochromatické',       'price' => 49.99, 'discount' => 0,  'quantity' => 12, 'min_quantity' => 3, 'filter' => 'photochromic'],
+            ['name' => 'Polarizované šošovky',    'description' => 'Polarizované',          'price' => 44.99, 'discount' => 5,  'quantity' => 10, 'min_quantity' => 2, 'filter' => 'polarized'],
+        ];
+
+        foreach ($lenses as $data) {
+            $stock = Stock::create([
+                'name'         => $data['name'],
+                'description'  => $data['description'],
+                'price'        => $data['price'],
+                'discount'     => $data['discount'],
+                'quantity'     => $data['quantity'],
+                'min_quantity' => $data['min_quantity'],
+                'product_type' => 'lense',
+            ]);
+            Lense::create([
+                'stock_id' => $stock->id,
+                'filter'   => $data['filter'],
+            ]);
+        }
+
         $contactLenses = [
-            [
-                'name'              => 'DailyFresh',
-                'description'       => 'jednodenné',
-                'price'             => 29.99,
-                'discount'          => 0,
-                'quantity'          => 50,
-                'min_quantity'      => 10,
-                'product_type'      => 'contact_lenses',
-                'product_id'        => 1,
-                'product_type_model'=> 'App\Models\ContactLenses',
-            ],
-            [
-                'name'              => 'WeeklyComfort',
-                'description'       => 'týždenné',
-                'price'             => 39.99,
-                'discount'          => 5,
-                'quantity'          => 30,
-                'min_quantity'      => 5,
-                'product_type'      => 'contact_lenses',
-                'product_id'        => 2,
-                'product_type_model'=> 'App\Models\ContactLenses',
-            ],
-            [
-                'name'              => 'MonthlyPro',
-                'description'       => 'mesačné',
-                'price'             => 49.99,
-                'discount'          => 0,
-                'quantity'          => 20,
-                'min_quantity'      => 4,
-                'product_type'      => 'contact_lenses',
-                'product_id'        => 3,
-                'product_type_model'=> 'App\Models\ContactLenses',
-            ],
+            ['name' => 'DailyFresh',    'description' => 'Jednodenné', 'price' => 29.99, 'discount' => 0, 'quantity' => 50, 'min_quantity' => 10, 'wear_period' => 'daily'],
+            ['name' => 'WeeklyComfort', 'description' => 'Týždenné',   'price' => 39.99, 'discount' => 5, 'quantity' => 30, 'min_quantity' => 5,  'wear_period' => 'weekly'],
+            ['name' => 'MonthlyPro',    'description' => 'Mesačné',    'price' => 49.99, 'discount' => 0, 'quantity' => 20, 'min_quantity' => 4,  'wear_period' => 'monthly'],
+            ['name' => 'YearlyMax',     'description' => 'Ročné',      'price' => 69.99, 'discount' => 0, 'quantity' => 10, 'min_quantity' => 2,  'wear_period' => 'yearly'],
         ];
 
-        foreach (array_merge($glasses, $contactLenses) as $item) {
-            Stock::create($item);
+        foreach ($contactLenses as $data) {
+            $stock = Stock::create([
+                'name'         => $data['name'],
+                'description'  => $data['description'],
+                'price'        => $data['price'],
+                'discount'     => $data['discount'],
+                'quantity'     => $data['quantity'],
+                'min_quantity' => $data['min_quantity'],
+                'product_type' => 'contact_lense',
+            ]);
+            ContactLenses::create([
+                'stock_id'    => $stock->id,
+                'wear_period' => $data['wear_period'],
+            ]);
         }
     }
 }
