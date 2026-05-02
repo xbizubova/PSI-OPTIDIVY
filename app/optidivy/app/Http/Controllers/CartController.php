@@ -24,6 +24,10 @@ class CartController extends Controller
 
     public function add(Stock $stock)
     {
+        if (auth()->user()->prescription === null) {
+            return back()->with('no_prescription', true);
+        }
+
         $cart = $this->currentCart();
 
         $product = $stock->contactLense ?? $stock->lense ?? $stock->frame;

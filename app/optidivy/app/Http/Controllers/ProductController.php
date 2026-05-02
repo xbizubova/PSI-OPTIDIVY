@@ -38,6 +38,10 @@ class ProductController extends Controller
 
     public function makeGlasses(Lense $lense)
     {
+        if (auth()->user()->prescription === null) {
+            return back()->with('no_prescription', true);
+        }
+
         $frameId = session('selected_frame_id');
         abort_unless($frameId, 404);
 

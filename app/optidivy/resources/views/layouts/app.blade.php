@@ -94,5 +94,14 @@
 </footer>
 
 @stack('scripts')
+@if(session('no_prescription'))
+    <div class="modal-overlay">
+        <div class="modal-box">
+            <p>Nemáte predpis! Zarezervujte si vyšetrenie u nášho optometristu.</p>
+            <a href="{{ route('rezervacia') }}" class="btn-add-cart">Rezervovať vyšetrenie</a>
+            <button onclick="this.closest('.modal-overlay').style.display='none'" class="btn-add-cart">Zavrieť</button>
+        </div>
+    </div>
+@endif
 </body>
 </html>
