@@ -10,6 +10,8 @@ use App\Http\Controllers\UcetController;
 // ── Verejné ──────────────────────────────────────────
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/produkty/{kategoria}', [ProductController::class, 'kategoria'])->name('produkty');
+Route::post('/produkty/okuliare/{frame}', [ProductController::class, 'selectFrame'])->name('produkty.selectFrame');
+Route::post('/produkty/lenses/{lense}', [ProductController::class, 'makeGlasses'])->name('produkty.makeGlasses');
 Route::get('/rezervacia', [RezervaciaController::class, 'index'])->name('rezervacia');
 Route::middleware('auth')->group(function () {
     Route::get('/kosik',                [CartController::class, 'index'])->name('kosik');

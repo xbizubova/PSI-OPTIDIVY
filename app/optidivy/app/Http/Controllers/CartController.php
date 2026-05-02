@@ -12,7 +12,11 @@ class CartController extends Controller
     public function index()
     {
         $cart = $this->currentCart();
-        $cartItems = $cart->items()->with('product')->get();
+        $cartItems = $cart->items()->with([
+            'product',
+            'product.frame.stock',
+            'product.lense.stock',
+        ])->get();
         $total = $cart->getTotal();
 
         return view('kosik', compact('cartItems', 'total'));
@@ -56,8 +60,13 @@ class CartController extends Controller
             }
 
             $item->increment('quantity');
+        } else {
+            if ($item->quantity <= 1) {
+                $item->delete();
+            } else {
+                $item->decrement('quantity');
+            }
         }
-
 
         return redirect()->route('kosik');
     }
