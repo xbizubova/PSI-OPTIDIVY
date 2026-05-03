@@ -40,6 +40,30 @@
             @endif
         </p>
 
+        <div class="confirm-wrap" style="margin-top: 16px;">
+            <button type="button" onclick="document.getElementById('phone-popup').style.display='flex'">
+                Zavolať sekretárke
+            </button>
+        </div>
+
+        {{-- Popup --}}
+        <div id="phone-popup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4);
+             justify-content:center; align-items:center; z-index:999;">
+            <div style="background:#fff; padding:40px; text-align:center; border-radius:4px; min-width:280px;">
+                <p style="font-size:11px; letter-spacing:0.15em; margin-bottom:16px;">SEKRETÁRKA</p>
+                <a href="tel:+421900123456" style="font-size:24px; font-weight:600; color:var(--black);
+                   text-decoration:none; letter-spacing:0.05em;">
+                    +421 900 123 456
+                </a>
+                <br><br>
+                <button type="button" onclick="document.getElementById('phone-popup').style.display='none'"
+                        style="font-size:11px; letter-spacing:0.12em; background:none; border:none;
+                               cursor:pointer; color:var(--grey-dark); margin-top:8px;">
+                    Zavrieť
+                </button>
+            </div>
+        </div>
+
         {{-- Dostupné sloty z controllera ako JSON pre JS --}}
         <script>
             const AVAILABLE_SLOTS = @json($availableSlots);

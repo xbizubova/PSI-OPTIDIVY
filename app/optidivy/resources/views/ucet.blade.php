@@ -11,12 +11,19 @@
             <p class="sidebar-label">MOJE REZERVÁCIE</p>
 
             @forelse($appointments as $appointment)
-                <div class="reservation-item">
-                    <p>
+                <div class="reservation-item" style="display:flex; justify-content:space-between; align-items:center;">
+                    <p style="margin:0;">
                         Vyšetrenie Zraku<br>
                         {{ \Carbon\Carbon::parse($appointment->date)->format('d.m.Y') }}
                         {{ \App\Http\Controllers\RezervaciaController::SLOTS[$appointment->slot] }}
                     </p>
+                    <form method="POST" action="{{ route('rezervacia.cancel', $appointment->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Zrušiť túto rezerváciu?')">
+                            Zrušiť
+                        </button>
+                    </form>
                 </div>
             @empty
                 <p style="font-size:12px; color:var(--grey-dark);">

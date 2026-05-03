@@ -17,6 +17,7 @@ Route::get('/produkty/{kategoria}', [ProductController::class, 'kategoria'])->na
 Route::post('/produkty/okuliare/{frame}', [ProductController::class, 'selectFrame'])->name('produkty.selectFrame');
 Route::post('/produkty/lenses/{lense}', [ProductController::class, 'makeGlasses'])->name('produkty.makeGlasses');
 Route::get('/rezervacia', [RezervaciaController::class, 'index'])->name('rezervacia');
+Route::delete('/rezervacia/{id}/cancel', [RezervaciaController::class, 'cancel'])->name('rezervacia.cancel');
 Route::middleware('auth')->group(function () {
     Route::get('/kosik',                [CartController::class, 'index'])->name('kosik');
     Route::post('/kosik/{stock}',       [CartController::class, 'add'])->name('kosik.add');

@@ -80,4 +80,16 @@ class RezervaciaController extends Controller
                 Carbon::parse($request->date)->translatedFormat('l d.m.') .
                 ' o ' . self::SLOTS[$request->slot]);
     }
+
+    public function cancel($id)
+    {
+        $appointment = \App\Models\Appointment::where('id', $id)
+            ->where('customer_id', auth()->id())
+            ->firstOrFail();
+
+        $appointment->update(['booked' => false]);
+
+        return redirect()->route('ucet')  // ← zmenené z profile.edit na ucet
+        ->with('success', 'Rezervácia bola zrušená.');
+    }
 }
