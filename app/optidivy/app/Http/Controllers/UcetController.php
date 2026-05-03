@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,6 +11,8 @@ class UcetController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        Order::refreshDelayStatuses();
 
         $appointments = $user->appointments()
             ->where('booked', true)
@@ -20,9 +23,7 @@ class UcetController extends Controller
             ->with('items.product')
             ->latest()
             ->take(5)
-            ->get()
-            ->flatMap(fn($order) => $order->items)
-            ->take(5);
+            ->get();
 
         return view('ucet', compact('user', 'appointments', 'recentOrders'));
     }

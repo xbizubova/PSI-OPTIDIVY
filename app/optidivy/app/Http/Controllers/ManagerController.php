@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,6 +11,8 @@ class ManagerController extends Controller
 {
     public function index(Request $request)
     {
+        Order::refreshDelayStatuses();
+
         $query = Stock::query()
             ->with(['frame', 'lense', 'contactLense'])
             ->orderBy('name');
@@ -89,6 +92,8 @@ class ManagerController extends Controller
         DB::transaction(function () use ($stock, $quantity) {
             $stock->increment('quantity', $quantity);
         });
+
+        Order::refreshDelayStatuses();
 
         return back()->with(
             'success',

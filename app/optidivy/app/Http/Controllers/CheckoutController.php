@@ -73,6 +73,8 @@ class CheckoutController extends Controller
             $cart->items()->delete();
         });
 
+        Order::refreshDelayStatuses();
+
         session()->forget([
             'checkout_first_name',
             'checkout_last_name',

@@ -113,10 +113,24 @@
     <section class="recent-section">
         <h2 class="recent-title">Naposledy objednané</h2>
         <div class="recent-grid">
-            @forelse($recentOrders as $item)
+            @forelse($recentOrders as $order)
                 <div class="recent-card">
                     <div class="recent-img"></div>
-                    <p class="recent-name">{{ strtoupper($item->product->name) }}</p>
+                    <p class="recent-name">OBJEDNAVKA #{{ $order->id }}</p>
+                    <span class="account-order-status status-{{ $order->status }}">
+                        @if($order->status === 'delayed')
+                            oneskoren&eacute;
+                        @elseif($order->status === 'claimed')
+                            prevzat&eacute;
+                        @elseif($order->status === 'completed')
+                            dokon&#269;en&eacute;
+                        @else
+                            &#269;ak&aacute;
+                        @endif
+                    </span>
+                    <p class="account-order-items">
+                        {{ $order->items->count() }} polo&#382;iek
+                    </p>
                 </div>
             @empty
                 <p style="font-size:13px; color:var(--grey-dark);">
