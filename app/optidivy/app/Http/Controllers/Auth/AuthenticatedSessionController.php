@@ -34,6 +34,10 @@ class AuthenticatedSessionController extends Controller
             return redirect('/optometrista');
         }
 
+        if ($user->isManager()) {
+            return redirect('/manager');
+        }
+
         return redirect('/ucet');
     }
 
