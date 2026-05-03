@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Stock extends Model
 {
+    public const STATE_OK = 'ok';
+    public const STATE_LOW = 'low';
+    public const STATE_CRITICAL = 'critical';
+
     protected $fillable = [
         'name', 'discontinued', 'description', 'price', 'discount',
         'quantity', 'min_quantity', 'product_type'
@@ -24,6 +28,35 @@ class Stock extends Model
     public function getLowStock(): array
     {
         return Stock::whereColumn('quantity', '<=', 'min_quantity')->get()->toArray();
+    }
+
+    public function stockState(): string
+    {
+        if ($this->quantity <= ($this->min_quantity / 2)) {
+            return self::STATE_CRITICAL;
+        }
+
+        if ($this->quantity <= $this->min_quantity) {
+            return self::STATE_LOW;
+        }
+
+        return self::STATE_OK;
+    }
+
+    public function stockStateLabel(): string
+    {
+        return match ($this->stockState()) {
+            self::STATE_CRITICAL => 'Critical',
+            self::STATE_LOW => 'Low',
+            default => 'OK',
+        };
+    }
+
+    public function mockReorderQuantity(): int
+    {
+        $targetQuantity = max($this->min_quantity * 3, 10);
+
+        return max($targetQuantity - $this->quantity, $this->min_quantity, 1);
     }
 
     public function lense(): HasOne

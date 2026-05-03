@@ -88,6 +88,8 @@ Route::middleware(['auth', 'optometrista'])->group(function () {
 // ── Auth routes (Breeze) ──────────────────────────────
 Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/manager', [ManagerController::class, 'index'])->name('manager');
+    Route::post('/manager/stocks/{stock}/order', [ManagerController::class, 'orderFromSupplier'])
+        ->name('manager.stocks.order');
 });
 
 require __DIR__.'/auth.php';

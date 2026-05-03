@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ManagerController extends Controller
 {
@@ -24,12 +25,19 @@ class ManagerController extends Controller
         if ($request->filled('stock')) {
             $query->where(function ($stocks) use ($request) {
                 foreach ((array) $request->stock as $stockState) {
-                    if ($stockState === 'low') {
-                        $stocks->orWhereColumn('quantity', '<=', 'min_quantity');
+                    if ($stockState === Stock::STATE_OK || $stockState === 'available') {
+                        $stocks->orWhereColumn('quantity', '>', 'min_quantity');
                     }
 
-                    if ($stockState === 'available') {
-                        $stocks->orWhereColumn('quantity', '>', 'min_quantity');
+                    if ($stockState === 'low') {
+                        $stocks->orWhere(function ($low) {
+                            $low->whereColumn('quantity', '<=', 'min_quantity')
+                                ->whereRaw('quantity > min_quantity / 2');
+                        });
+                    }
+
+                    if ($stockState === Stock::STATE_CRITICAL) {
+                        $stocks->orWhereRaw('quantity <= min_quantity / 2');
                     }
 
                     if ($stockState === 'discontinued') {
@@ -61,8 +69,30 @@ class ManagerController extends Controller
             });
         }
 
+        $scan = [
+            Stock::STATE_OK => Stock::whereColumn('quantity', '>', 'min_quantity')->count(),
+            Stock::STATE_LOW => Stock::whereColumn('quantity', '<=', 'min_quantity')
+                ->whereRaw('quantity > min_quantity / 2')
+                ->count(),
+            Stock::STATE_CRITICAL => Stock::whereRaw('quantity <= min_quantity / 2')->count(),
+        ];
+
         $stocks = $query->paginate(8)->withQueryString();
 
-        return view('manager', compact('stocks'));
+        return view('manager', compact('stocks', 'scan'));
+    }
+
+    public function orderFromSupplier(Stock $stock)
+    {
+        $quantity = $stock->mockReorderQuantity();
+
+        DB::transaction(function () use ($stock, $quantity) {
+            $stock->increment('quantity', $quantity);
+        });
+
+        return back()->with(
+            'success',
+            "Mock objednávka od dodávateľa prijatá: {$stock->name} +{$quantity} ks."
+        );
     }
 }
