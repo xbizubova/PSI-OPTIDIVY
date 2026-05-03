@@ -11,12 +11,14 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cart = $this->currentCart();
+        $cart = Cart::firstOrCreate(['customer_id' => auth()->id()]);
         $cartItems = $cart->items()->with([
-            'product',
-            'product.frame.stock',
-            'product.lense.stock',
-        ])->get();
+            'product' => function($query) {},
+        ])->get()->each(function($item) {
+            if ($item->product instanceof \App\Models\Glasses) {
+                $item->product->load('frame.stock', 'lense.stock');
+            }
+        });
         $total = $cart->getTotal();
 
         return view('kosik', compact('cartItems', 'total'));

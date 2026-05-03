@@ -14,8 +14,16 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('users')->cascadeOnDelete();
-            $table->enum('status', ['pending', 'processing', 'completed', 'cancelled'])
-                ->default('pending');
+            $table->enum('status', ['pending', 'claimed', 'completed'])->default('pending');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone')->nullable();
+            $table->enum('delivery', ['predajna', 'adresa'])->default('predajna');
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->enum('payment', ['karta', 'hotovost'])->default('karta');
             $table->timestamps();
         });
     }

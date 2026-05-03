@@ -15,7 +15,10 @@ class ProductController extends Controller
         if (auth()->check() && auth()->user()->isOptometrist()) {
             return redirect()->route('optometrista');
         }
-        $products = Stock::latest()->take(4)->get();
+        $products = Stock::whereIn('product_type', ['frame', 'contact_lense'])
+            ->latest()
+            ->take(4)
+            ->get();
         return view('index', compact('products'));
     }
 

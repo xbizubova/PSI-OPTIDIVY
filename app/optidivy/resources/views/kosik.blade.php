@@ -10,8 +10,12 @@
                     <div class="cart-item">
                         <div class="cart-item-img"></div>
                         <div class="cart-item-info">
-                            <p class="cart-item-name">{{ strtoupper($item->product->name) }}</p>
-                            <p class="cart-item-sub">Sklá: {{ $item->product->description }}</p>
+                            @if($item->product instanceof \App\Models\Glasses)
+                                <p class="cart-item-name">{{ strtoupper($item->product->frame->stock->name) }}</p>
+                                <p class="cart-item-sub">Sklá: {{ $item->product->lense->stock->name }}</p>
+                            @else
+                                <p class="cart-item-name">{{ strtoupper($item->product->stock->name) }}</p>
+                            @endif
                             <form method="POST" action="{{ route('kosik.update', $item->id) }}">
                                 @csrf @method('PATCH')
                                 <div class="qty-control">
@@ -21,9 +25,7 @@
                                 </div>
                             </form>
                         </div>
-                        <span class="cart-item-price">
-            {{ number_format($item->getSubtotal(), 2) }}€
-          </span>
+                        <span class="cart-item-price">{{ number_format($item->getSubtotal(), 2) }}€</span>
                     </div>
                 @empty
                     <p>Košík je prázdny.</p>

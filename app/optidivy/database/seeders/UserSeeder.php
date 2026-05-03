@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Prescription;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -60,6 +61,17 @@ class UserSeeder extends Seeder
             'email'      => 'holly@gmail.com',
             'password'   => Hash::make('heslo123'),
             'role'       => 'customer',
+        ]);
+
+        $customer = User::where('email', 'mrkvicka@gmail.com')->first();
+
+        Prescription::create([
+            'customer_id'    => $customer->id,
+            'sphere_right'   => -1.5,
+            'sphere_left'    => -1.25,
+            'cylinder'       => -0.5,
+            'axis'           => 90,
+            'pupil_distance' => 63.0,
         ]);
     }
 }

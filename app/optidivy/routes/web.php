@@ -6,6 +6,8 @@ use App\Http\Controllers\OptometristaController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UcetController;
+use App\Http\Controllers\CheckoutController;
+use App\Models\Cart;
 
 // ── Verejné ──────────────────────────────────────────
 Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -19,9 +21,51 @@ Route::middleware('auth')->group(function () {
     Route::patch('/kosik/{item}',       [CartController::class, 'update'])->name('kosik.update');
     Route::delete('/kosik/{item}',      [CartController::class, 'destroy'])->name('kosik.destroy');
 });
-Route::get('/kontakt', fn() => view('kontakt'))->name('kontakt');
-Route::get('/donaska', fn() => view('donaska'))->name('donaska');
-Route::get('/platba',  fn() => view('platba'))->name('platba');
+Route::get('/kontakt', function() {
+    $cart = Cart::firstOrCreate(['customer_id' => auth()->id()]);
+    $cartItems = $cart->items()->with([
+        'product' => function($query) {},
+    ])->get()->each(function($item) {
+        if ($item->product instanceof \App\Models\Glasses) {
+            $item->product->load('frame.stock', 'lense.stock');
+        }
+    });
+    $total = $cart->getTotal();
+    return view('kontakt', compact('cartItems', 'total'));
+})->middleware('auth')->name('kontakt');
+
+Route::post('/kontakt', [CheckoutController::class, 'storeKontakt'])->middleware('auth')->name('kontakt.store');
+
+Route::get('/donaska', function() {
+    $cart = Cart::firstOrCreate(['customer_id' => auth()->id()]);
+    $cartItems = $cart->items()->with([
+        'product' => function($query) {},
+    ])->get()->each(function($item) {
+        if ($item->product instanceof \App\Models\Glasses) {
+            $item->product->load('frame.stock', 'lense.stock');
+        }
+    });
+    $total = $cart->getTotal();
+    return view('donaska', compact('cartItems', 'total'));
+})->middleware('auth')->name('donaska');
+
+Route::post('/donaska', [CheckoutController::class, 'storeDonaska'])->middleware('auth')->name('donaska.store');
+
+Route::get('/platba', function() {
+    $cart = Cart::firstOrCreate(['customer_id' => auth()->id()]);
+    $cartItems = $cart->items()->with([
+        'product' => function($query) {},
+    ])->get()->each(function($item) {
+        if ($item->product instanceof \App\Models\Glasses) {
+            $item->product->load('frame.stock', 'lense.stock');
+        }
+    });
+    $total = $cart->getTotal();
+    $donaska = session('checkout_donaska');
+    return view('platba', compact('cartItems', 'total', 'donaska'));
+})->middleware('auth')->name('platba');
+
+Route::post('/platba', [CheckoutController::class, 'storePlatba'])->middleware('auth')->name('platba.store');
 
 // ── Rezervácia – uloženie ─────────────────────────────
 Route::post('/rezervacia', [RezervaciaController::class, 'store'])
