@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'klient'       => \App\Http\Middleware\EnsureKlient::class,
             'optometrista' => \App\Http\Middleware\EnsureOptometrista::class,
+            'manager'      => \App\Http\Middleware\EnsureManager::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -13,7 +13,9 @@
     <a href="{{ url('/') }}" class="logo">OPTIDIVY</a>
     <div class="header-actions">
         @auth
-            @if(Auth::user()->role !== 'optometrist')
+            @if(Auth::user()->isManager())
+                <a href="{{ route('manager') }}">{{ Auth::user()->first_name }}</a>
+            @elseif(Auth::user()->isCustomer())
                 <a href="{{ route('ucet') }}">{{ Auth::user()->first_name }}</a>
             @else
                 <span>{{ Auth::user()->first_name }}</span>
@@ -35,7 +37,7 @@
                     </svg>
                 </a>
             @else
-                @if(Auth::user()->role !== 'optometrist')
+                @if(Auth::user()->isCustomer())
                     <a href="{{ route('kosik') }}" class="cart-link">
                         <svg class="cart-icon" viewBox="0 0 24 24" stroke-width="1.5">
                             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>

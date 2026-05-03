@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\UcetController;
 use App\Http\Controllers\CheckoutController;
 use App\Models\Cart;
+use App\Http\Controllers\ManagerController;
 
 // ── Verejné ──────────────────────────────────────────
 Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -85,4 +86,8 @@ Route::middleware(['auth', 'optometrista'])->group(function () {
 });
 
 // ── Auth routes (Breeze) ──────────────────────────────
+Route::middleware(['auth', 'manager'])->group(function () {
+    Route::get('/manager', [ManagerController::class, 'index'])->name('manager');
+});
+
 require __DIR__.'/auth.php';
