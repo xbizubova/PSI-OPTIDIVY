@@ -12,6 +12,9 @@ class ProductController extends Controller
 {
     public function index()
     {
+        if (auth()->check() && auth()->user()->isOptometrist()) {
+            return redirect()->route('optometrista');
+        }
         $products = Stock::latest()->take(4)->get();
         return view('index', compact('products'));
     }

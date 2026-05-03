@@ -13,7 +13,11 @@
     <a href="{{ url('/') }}" class="logo">OPTIDIVY</a>
     <div class="header-actions">
         @auth
-            <span>{{ Auth::user()->first_name }}</span>
+            @if(Auth::user()->role !== 'optometrist')
+                <a href="{{ route('ucet') }}">{{ Auth::user()->first_name }}</a>
+            @else
+                <span>{{ Auth::user()->first_name }}</span>
+            @endif
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit">LOG OUT</button>
@@ -22,19 +26,29 @@
             <a href="{{ route('login') }}">LOG IN</a>
         @endauth
 
-        <a href="{{ route('kosik') }}" class="cart-link">
-            <svg class="cart-icon" viewBox="0 0 24 24" stroke-width="1.5">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <path d="M16 10a4 4 0 01-8 0"/>
-            </svg>
-            @auth
-                @php($cartCount = Auth::user()->cart?->items()->sum('quantity') ?? 0)
-                @if($cartCount > 0)
-                    <span class="cart-badge">{{ $cartCount }}</span>
+            @guest
+                <a href="{{ route('kosik') }}" class="cart-link">
+                    <svg class="cart-icon" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 01-8 0"/>
+                    </svg>
+                </a>
+            @else
+                @if(Auth::user()->role !== 'optometrist')
+                    <a href="{{ route('kosik') }}" class="cart-link">
+                        <svg class="cart-icon" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <path d="M16 10a4 4 0 01-8 0"/>
+                        </svg>
+                        @php($cartCount = Auth::user()->cart?->items()->sum('quantity') ?? 0)
+                            @if($cartCount > 0)
+                                <span class="cart-badge">{{ $cartCount }}</span>
+                            @endif
+                    </a>
                 @endif
-            @endauth
-        </a>
+            @endguest
     </div>
 </header>
 

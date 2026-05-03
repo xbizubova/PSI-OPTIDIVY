@@ -6,26 +6,33 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('users')->cascadeOnDelete();
-            $table->float('sphere_right');
-            $table->float('sphere_left');
-            $table->float('cylinder');
-            $table->float('axis');
-            $table->float('pupil_distance');
+
+            // OD – pravé oko
+            $table->string('od_ostrost')->nullable();
+            $table->float('sphere_right')->nullable();
+            $table->float('cylinder')->nullable();
+            $table->integer('axis')->nullable();
+            $table->float('pupil_distance')->nullable();
+
+            // OS – ľavé oko
+            $table->string('os_ostrost')->nullable();
+            $table->float('sphere_left')->nullable();
+            $table->float('os_cylinder')->nullable();
+            $table->integer('os_axis')->nullable();
+            $table->float('os_pupil_distance')->nullable();
+
+            // Sklá
+            $table->string('lens_type')->nullable();
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('prescriptions');

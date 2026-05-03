@@ -688,14 +688,17 @@ button.slot { border: 1.5px solid transparent; }
 
 .optom-layout {
     display: grid;
-    grid-template-columns: 300px 1fr;
-    min-height: calc(100vh - 80px);
+    grid-template-columns: 260px 1fr;
+    min-height: calc(100vh - 85px);
 }
 
-/* ── Sidebar – patient list ── */
 .patient-sidebar {
     border-right: 1px solid var(--grey-light);
     padding: 40px 32px;
+    position: sticky;
+    top: 85px;
+    height: calc(100vh - 85px);
+    overflow-y: auto;
 }
 
 .sidebar-title {
@@ -731,7 +734,6 @@ button.slot { border: 1.5px solid transparent; }
 
 .patient-info .patient-time {
     font-size: 13px;
-    font-weight: 400;
     color: var(--grey-dark);
 }
 
@@ -741,13 +743,10 @@ button.slot { border: 1.5px solid transparent; }
     border-radius: 50%;
     border: 1.5px solid var(--grey-mid);
     flex-shrink: 0;
-    transition: border-color 0.2s, background 0.2s;
     position: relative;
+    transition: border-color 0.2s;
 }
-
-.patient-item.active .patient-radio {
-    border-color: var(--black);
-}
+.patient-item.active .patient-radio { border-color: var(--black); }
 .patient-item.active .patient-radio::after {
     content: '';
     position: absolute;
@@ -755,15 +754,15 @@ button.slot { border: 1.5px solid transparent; }
     border-radius: 50%;
     background: var(--black);
 }
-
 .patient-item:hover .patient-name { color: var(--accent); }
 
-/* ── Main exam panel ── */
+/* ── Exam panel ── */
 .exam-panel {
-    padding: 40px 48px 60px;
+    padding: 48px 48px 80px;
     display: flex;
     flex-direction: column;
     gap: 36px;
+    overflow-x: auto;
 }
 
 .exam-header {
@@ -786,103 +785,165 @@ button.slot { border: 1.5px solid transparent; }
     color: var(--black);
 }
 
-/* ── Eye cards grid ── */
-.eye-grid {
+.exam-success {
+    color: #2d6a2d;
+    background: #edfaed;
+    border: 1px solid #b6dfb6;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 13px;
+}
+
+.exam-errors {
+    background: #fde2e2;
+    border: 1px solid #f5b5b5;
+    border-radius: 8px;
+    padding: 12px 18px;
+    color: #8a1f1f;
+    font-size: 12px;
+}
+.exam-errors ul {
+    list-style: disc;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* ── 3-stĺpcový grid ── */
+.exam-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    align-items: start;
 }
 
 .eye-card {
     background: var(--grey-light);
     border-radius: 16px;
-    padding: 28px 28px 32px;
+    padding: 28px 24px 32px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
 .eye-label {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     color: var(--black);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--grey-mid);
 }
 
 .eye-field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
 }
 
 .eye-field label {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     color: var(--black);
 }
 
-.eye-field input {
+.range-hint {
+    font-weight: 400;
+    color: var(--grey-dark);
+    letter-spacing: 0.04em;
+}
+
+.eye-field input,
+.eye-select {
     background: var(--white);
     border: none;
     border-radius: 8px;
     padding: 12px 14px;
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 13px;
     color: var(--black);
     outline: none;
-    transition: box-shadow 0.2s;
     width: 100%;
+    transition: box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
 }
-.eye-field input:focus {
-    box-shadow: 0 0 0 2px var(--black);
+.eye-field input:focus,
+.eye-select:focus { box-shadow: 0 0 0 2px var(--black); }
+.eye-field input::placeholder { color: var(--grey-mid); }
+
+/* ── Lens card (3. stĺpec) ── */
+.lens-card { height: 100%; }
+
+.lens-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
 }
 
-/* ── Bottom actions ── */
+.lens-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--black);
+    transition: border-color 0.2s;
+}
+.lens-option:hover { border-color: var(--grey-mid); }
+.lens-option.selected { border-color: var(--black); }
+.lens-option input[type="radio"] { display: none; }
+
+.lens-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid var(--grey-mid);
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.2s;
+}
+.lens-option.selected .lens-dot { border-color: var(--black); }
+.lens-option.selected .lens-dot::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--black);
+}
+
+/* ── Actions ── */
 .exam-actions {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.btn-sklá {
-    padding: 16px 28px;
-    background: var(--white);
-    border: 1.5px solid var(--black);
-    border-radius: 10px;
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--black);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: background 0.2s, color 0.2s;
-}
-.btn-sklá:hover {
-    background: var(--black);
-    color: var(--white);
+    justify-content: flex-end;
 }
 
 .btn-potvrdit {
-    padding: 16px 40px;
+    margin-top: 12px;
+    padding: 18px 56px;
     background: var(--white);
     border: 1.5px solid var(--black);
     border-radius: 10px;
     font-family: var(--font-body);
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     color: var(--black);
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
 }
 .btn-potvrdit:hover {
     background: var(--black);
     color: var(--white);
+    transform: translateY(-2px);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1365,4 +1426,16 @@ button.slot { border: 1.5px solid transparent; }
     color: var(--black);
     text-align: center;
     transition: color 0.2s;
+}
+.optom-layout {
+    padding-top: var(--header-height); /* výška tvojho headeru */
+    display: flex;
+    min-height: 100vh;
+}
+
+.patient-sidebar {
+    position: sticky;
+    top: var(--header-height, 85.6px); /* sidebar začína pod headerom */
+    height: calc(100vh - var(--header-height, 85.6px));
+    overflow-y: auto;
 }
