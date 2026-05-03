@@ -41,7 +41,7 @@ class TechnikController extends Controller
         return back()->with('success', 'Stav objednávky bol zmenený.');
     }
 
-    public function consumeMaterials(Order $order)
+    public function completeOrder(Order $order)
     {
         $order->update(['status' => 'completed']);
         return redirect()->route('technik')->with('success', 'Objednávka bola dokončená.');
