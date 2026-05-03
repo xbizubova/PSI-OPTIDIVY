@@ -9,6 +9,7 @@ use App\Http\Controllers\UcetController;
 use App\Http\Controllers\CheckoutController;
 use App\Models\Cart;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\TechnikController;
 
 // ── Verejné ──────────────────────────────────────────
 Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -84,7 +85,14 @@ Route::middleware(['auth', 'optometrista'])->group(function () {
     Route::post('/optometrista/predpis', [OptometristaController::class, 'storePrescription'])
         ->name('optometrista.prescription.store');
 });
-
+// ── Technik ──────────────────────────────────────
+Route::middleware(['auth', 'technik'])->group(function () {
+    Route::get('/technik', [TechnikController::class, 'index'])->name('technik');
+    Route::get('/technik/{order}', [TechnikController::class, 'show'])->name('technik.show');
+    Route::patch('/technik/{order}/status', [TechnikController::class, 'updateStatus'])->name('technik.status');
+    Route::post('/technik/{order}/consume/{stock}', [TechnikController::class, 'consumeOne'])->name('technik.consume.one');
+    Route::post('/technik/{order}/consume', [TechnikController::class, 'consumeMaterials'])->name('technik.consume');
+});
 // ── Auth routes (Breeze) ──────────────────────────────
 Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/manager', [ManagerController::class, 'index'])->name('manager');

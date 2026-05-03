@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'klient'       => \App\Http\Middleware\EnsureKlient::class,
             'optometrista' => \App\Http\Middleware\EnsureOptometrista::class,
             'manager'      => \App\Http\Middleware\EnsureManager::class,
+            'technik'      => \App\Http\Middleware\EnsureTechnician::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
