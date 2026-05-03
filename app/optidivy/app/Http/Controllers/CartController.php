@@ -62,7 +62,7 @@ class CartController extends Controller
             $stock = $item->product->getStock();
 
             if ($stock !== null && $item->quantity + 1 > $stock->quantity) {
-                return back()->with('error', 'Na sklade je už len ' . $stock->quantity . ' ks.');
+                return back()->with('error', 'Na sklade je iba ' . $stock->quantity . ' ks.');
             }
 
             $item->increment('quantity');

@@ -91,7 +91,7 @@ Route::middleware(['auth', 'technik'])->group(function () {
     Route::get('/technik/{order}', [TechnikController::class, 'show'])->name('technik.show');
     Route::patch('/technik/{order}/status', [TechnikController::class, 'updateStatus'])->name('technik.status');
     Route::post('/technik/{order}/consume/{stock}', [TechnikController::class, 'consumeOne'])->name('technik.consume.one');
-    Route::post('/technik/{order}/consume', [TechnikController::class, 'consumeMaterials'])->name('technik.consume');
+    Route::post('/technik/{order}/consume', [TechnikController::class, 'completeOrder'])->name('technik.consume');
 });
 // ── Auth routes (Breeze) ──────────────────────────────
 Route::middleware(['auth', 'manager'])->group(function () {

@@ -69,7 +69,6 @@
                 </form>
             </div>
 
-            {{-- Right column --}}
             <div class="order-summary">
                 <p class="order-summary-title">ZÁKAZNÍK</p>
                 <div class="order-item">
