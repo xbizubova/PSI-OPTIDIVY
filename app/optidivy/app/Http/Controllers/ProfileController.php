@@ -16,7 +16,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        $rezervacia = \App\Models\Appointments\Appointment::where('customer_id', auth()->id())
+        $rezervacia = \App\Models\Appointment::where('customer_id', auth()->id())
             ->where('booked', true)
             ->where('date', '>=', today())
             ->orderBy('date')

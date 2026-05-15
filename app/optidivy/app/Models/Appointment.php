@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Appointments;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,11 +13,11 @@ class Appointment extends Model
 
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Users\User::class, 'customer_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     public function optometrist(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Users\User::class, 'optometrist_id');
+        return $this->belongsTo(User::class, 'optometrist_id');
     }
 }

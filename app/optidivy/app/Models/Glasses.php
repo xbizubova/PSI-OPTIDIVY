@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Models\Inventory;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class Glasses extends Model implements \App\Models\Product
+class Glasses extends Model implements Product
 {
     protected $fillable = ['frame_id', 'lense_id'];
 
     public function frame(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Inventory\Frame::class);
+        return $this->belongsTo(Frame::class);
     }
 
     public function lense(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Inventory\Lense::class);
+        return $this->belongsTo(Lense::class);
     }
 
-    public function addToCart(\App\Models\Orders\Cart $cart, int $qty = 1): void
+    public function addToCart(Cart $cart, int $qty = 1): void
     {
-        \App\Models\CartItem::updateOrCreate(
+        CartItem::updateOrCreate(
             [
                 'cart_id'      => $cart->id,
                 'product_id'   => $this->id,
@@ -40,7 +40,7 @@ class Glasses extends Model implements \App\Models\Product
         return $this->frame->stock->getPrice() + $this->lense->stock->getPrice();
     }
 
-    public function getStock(): ?\App\Models\Inventory\Stock
+    public function getStock(): ?Stock
     {
         return null;
     }

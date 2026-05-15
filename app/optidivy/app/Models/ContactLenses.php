@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Models\Inventory;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class ContactLenses extends Model implements \App\Models\Inventory\Product
+class ContactLenses extends Model implements Product
 {
     protected $fillable = ['stock_id', 'wear_period'];
 
     public function stock(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Inventory\Stock::class);
+        return $this->belongsTo(Stock::class);
     }
 
     public function getPrice(): float
@@ -23,9 +23,9 @@ class ContactLenses extends Model implements \App\Models\Inventory\Product
         return $this->stock->getPrice();
     }
 
-    public function addToCart(\App\Models\Orders\Cart $cart, int $qty = 1): void
+    public function addToCart(Cart $cart, int $qty = 1): void
     {
-        \App\Models\CartItem::updateOrCreate(
+        CartItem::updateOrCreate(
             [
                 'cart_id'      => $cart->id,
                 'product_id'   => $this->id,
@@ -35,7 +35,7 @@ class ContactLenses extends Model implements \App\Models\Inventory\Product
         );
     }
 
-    public function getStock(): \App\Models\Inventory\Stock
+    public function getStock(): Stock
     {
         return $this->stock;
     }

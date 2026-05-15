@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Orders\Cart;
-use App\Models\Orders\Order;
-use App\Models\Orders\OrderItem;
-use App\Models\Inventory\Glasses;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Glasses;
 use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
@@ -40,7 +40,7 @@ class CheckoutController extends Controller
         $cartItems = $cart->items()->with([
             'product' => function($query) {},
         ])->get()->each(function($item) {
-            if ($item->product instanceof \App\Models\Inventory\Glasses) {
+            if ($item->product instanceof \App\Models\Glasses) {
                 $item->product->load('frame.stock', 'lense.stock');
             }
         });

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inventory\Stock;
-use App\Models\Inventory\Frame;
-use App\Models\Inventory\Lense;
-use App\Models\Inventory\Glasses;
-use App\Models\Orders\Cart;
+use App\Models\Stock;
+use App\Models\Frame;
+use App\Models\Lense;
+use App\Models\Glasses;
+use App\Models\Cart;
 use App\Http\Controllers\CartController;
 class ProductController extends Controller
 {

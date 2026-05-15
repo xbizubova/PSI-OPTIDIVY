@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Inventory;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Stock extends Model
 {
@@ -61,16 +61,16 @@ class Stock extends Model
 
     public function lense(): HasOne
     {
-        return $this->hasOne(\App\Models\Inventory\Lense::class);
+        return $this->hasOne(Lense::class);
     }
 
     public function frame(): HasOne
     {
-        return $this->hasOne(\App\Models\Inventory\Frame::class);
+        return $this->hasOne(Frame::class);
     }
 
     public function contactLense(): HasOne
     {
-        return $this->hasOne(\App\Models\Inventory\ContactLenses::class);
+        return $this->hasOne(ContactLenses::class);
     }
 }

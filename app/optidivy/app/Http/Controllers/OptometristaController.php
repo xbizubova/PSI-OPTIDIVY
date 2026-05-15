@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointments\Appointment;
-use App\Models\Prescriptions\Prescription;
+use App\Models\Appointment;
+use App\Models\Prescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 

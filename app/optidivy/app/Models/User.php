@@ -1,10 +1,8 @@
 <?php
 
+namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-namespace App\Models\Users;
-
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -33,31 +31,31 @@ class User extends Authenticatable
 // Klient má predpis
     public function prescription(): HasOne
     {
-        return $this->hasOne(\App\Models\Prescriptions\Prescription::class, 'customer_id');
+        return $this->hasOne(Prescription::class, 'customer_id');
     }
 
 // Klient má košík
     public function cart(): HasOne
     {
-        return $this->hasOne(\App\Models\Orders\Cart::class, 'customer_id');
+        return $this->hasOne(Cart::class, 'customer_id');
     }
 
 // Klient má objednávky
     public function orders(): HasMany
     {
-        return $this->hasMany(\App\Models\Orders\Order::class, 'customer_id');
+        return $this->hasMany(Order::class, 'customer_id');
     }
 
 // Klient má rezervácie
     public function appointments(): HasMany
     {
-        return $this->hasMany(\App\Models\Appointments\Appointment::class, 'customer_id');
+        return $this->hasMany(Appointment::class, 'customer_id');
     }
 
 // Optometrista má rezervácie
     public function optometristAppointments(): HasMany
     {
-        return $this->hasMany(\App\Models\Appointment\Appointment::class, 'optometrist_id');
+        return $this->hasMany(Appointment::class, 'optometrist_id');
     }
 
 // Pomocné metódy pre roly

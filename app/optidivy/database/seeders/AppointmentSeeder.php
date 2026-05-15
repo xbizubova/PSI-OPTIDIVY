@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Appointments\Appointment;
-use App\Models\Users\User;
+use App\Models\Appointment;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class AppointmentSeeder extends Seeder

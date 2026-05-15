@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Orders;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class OrderItem extends Model
 {
@@ -15,7 +15,7 @@ class OrderItem extends Model
 
     public function order(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Orders\Order::class);
+        return $this->belongsTo(Order::class);
     }
 
     public function product(): MorphTo

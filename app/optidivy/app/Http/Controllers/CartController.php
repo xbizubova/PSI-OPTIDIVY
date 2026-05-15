@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Orders\Cart;
-use App\Models\Orders\CartItem;
-use App\Models\Inventory\Stock;
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -15,7 +15,7 @@ class CartController extends Controller
         $cartItems = $cart->items()->with([
             'product' => function($query) {},
         ])->get()->each(function($item) {
-            if ($item->product instanceof \App\Models\Inventory\Glasses) {
+            if ($item->product instanceof \App\Models\Glasses) {
                 $item->product->load('frame.stock', 'lense.stock');
             }
         });
@@ -34,7 +34,7 @@ class CartController extends Controller
 
         $product = $stock->contactLense ?? $stock->lense ?? $stock->frame;
 
-        abort_unless($product instanceof \App\Models\Inventory\Product, 404);
+        abort_unless($product instanceof \App\Models\Product, 404);
 
         $item = $cart->items()
             ->where('product_id', $product->id)

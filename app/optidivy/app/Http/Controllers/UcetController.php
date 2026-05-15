@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Orders\Order;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
