@@ -47,7 +47,7 @@ class ProductController extends Controller
 
     public function makeGlasses(Lense $lense)
     {
-        if (auth()->user()->prescription === null) {
+        if (!auth()->check() || auth()->user()->prescription === null) {
             return back()->with('no_prescription', true);
         }
 
