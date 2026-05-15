@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Orders;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,12 +12,12 @@ class Cart extends Model
 
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(\App\Models\Users\User::class, 'customer_id');
     }
 
     public function items(): HasMany
     {
-        return $this->hasMany(CartItem::class);
+        return $this->hasMany(\App\Models\Orders\CartItem::class);
     }
 
     public function getTotal(): float

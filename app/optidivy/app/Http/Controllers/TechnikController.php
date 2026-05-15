@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Stock;
+use App\Models\Orders\Order;
+use App\Models\Orders\OrderItem;
+use App\Models\Inventory\Stock;
 use Illuminate\Http\Request;
 
 
@@ -22,9 +22,9 @@ class TechnikController extends Controller
     {
         $order->load(['items.product']);
         $order->items->each(function($item) {
-            if ($item->product instanceof \App\Models\Glasses) {
+            if ($item->product instanceof \App\Models\Inventory\Glasses) {
                 $item->product->load('frame.stock', 'lense.stock');
-            } elseif ($item->product instanceof \App\Models\ContactLenses) {
+            } elseif ($item->product instanceof \App\Models\Inventory\ContactLenses) {
                 $item->product->load('stock');
             }
         });

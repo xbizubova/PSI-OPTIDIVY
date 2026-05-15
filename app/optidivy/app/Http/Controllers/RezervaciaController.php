@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-use App\Models\User;
+use App\Models\Users\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -83,7 +83,7 @@ class RezervaciaController extends Controller
 
     public function cancel($id)
     {
-        $appointment = \App\Models\Appointment::where('id', $id)
+        $appointment = \App\Models\Appointments\Appointment::where('id', $id)
             ->where('customer_id', auth()->id())
             ->firstOrFail();
 

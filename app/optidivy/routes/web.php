@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UcetController;
 use App\Http\Controllers\CheckoutController;
-use App\Models\Cart;
+use App\Models\Orders\Cart;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\TechnikController;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Perscriptions;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +24,6 @@ class Prescription extends Model
     ];
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(\App\Models\Users\User::class, 'customer_id');
     }
 }

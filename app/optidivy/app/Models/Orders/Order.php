@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Orders;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -22,12 +22,12 @@ class Order extends Model
 
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(\App\Models\Users\User::class, 'customer_id');
     }
 
     public function items(): HasMany
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(\App\Models\Orders\OrderItem::class);
     }
 
     public function getTotal(): float
@@ -39,20 +39,20 @@ class Order extends Model
     {
         $this->loadMissing('items.product');
 
-        return $this->items->contains(function (OrderItem $item) {
+        return $this->items->contains(function (\App\Models\Orders\OrderItem $item) {
             $product = $item->product;
 
-            if ($product instanceof Glasses) {
+            if ($product instanceof \App\Models\Inventory\Glasses) {
                 $product->loadMissing('frame.stock', 'lense.stock');
 
-                return $product->frame?->stock?->stockState() === Stock::STATE_CRITICAL
-                    || $product->lense?->stock?->stockState() === Stock::STATE_CRITICAL;
+                return $product->frame?->stock?->stockState() === \App\Models\Inventory\Stock::STATE_CRITICAL
+                    || $product->lense?->stock?->stockState() === \App\Models\Inventory\Stock::STATE_CRITICAL;
             }
 
-            if ($product instanceof Frame || $product instanceof Lense || $product instanceof ContactLenses) {
+            if ($product instanceof \App\Models\Inventory\Frame || $product instanceof \App\Models\Inventory\Lense || $product instanceof \App\Models\Inventory\ContactLenses) {
                 $product->loadMissing('stock');
 
-                return $product->stock?->stockState() === Stock::STATE_CRITICAL;
+                return $product->stock?->stockState() === \App\Models\Inventory\Stock::STATE_CRITICAL;
             }
 
             return false;

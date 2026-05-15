@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stock;
-use App\Models\Order;
+use App\Models\Inventory\Stock;
+use App\Models\Orders\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

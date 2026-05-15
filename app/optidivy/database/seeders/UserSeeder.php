@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Prescription;
+use App\Models\Users\User;
+use App\Models\Prescriptions\Prescription;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 

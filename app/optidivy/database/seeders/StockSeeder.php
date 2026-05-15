@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\ContactLenses;
-use App\Models\Frame;
-use App\Models\Lense;
-use App\Models\Stock;
+use App\Models\Inventory\ContactLenses;
+use App\Models\Inventory\Frame;
+use App\Models\Inventory\Lense;
+use App\Models\Inventory\Stock;
 use Illuminate\Database\Seeder;
 
 class StockSeeder extends Seeder
